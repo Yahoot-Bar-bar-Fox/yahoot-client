@@ -7,7 +7,11 @@
       <div class="card-body">
         <p>Player Count : 1</p>
 
-        <button type="button" class="btn btn-lg btn-block btn-outline-primary">
+        <button
+          @click="joinRoom"
+          type="button"
+          class="btn btn-lg btn-block btn-outline-primary"
+        >
           Join
         </button>
       </div>
@@ -17,7 +21,12 @@
 
 <script>
 export default {
-  name: 'RoomCard'
+  name: 'RoomCard',
+  methods: {
+    joinRoom: function() {
+      this.$router.push('/start')
+    }
+  }
 }
 </script>
 
