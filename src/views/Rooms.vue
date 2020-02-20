@@ -1,65 +1,47 @@
 <template>
   <div class="home" style="margin-top: 80px">
     <div class="wrapper fadeInDown">
+      <h1>Hello Player1</h1>
       <div id="formContent">
-        <!-- Tabs Titles -->
-
-        <!-- Icon -->
-        <div class="fadeIn first">
-          <img
-            src="https://cdn.dribbble.com/users/1599514/screenshots/3537734/y_animation.gif"
-            id="icon"
-            alt="User Icon"
-          />
-        </div>
-
-        <!-- Login Form -->
-        <form @submit.prevent='login'>
+        <form>
           <input
             type="text"
             id="login"
             class="fadeIn second"
-            name="login"
-            placeholder="Input your username..."
-            v-model="username"
+            name="room"
+            placeholder="Create room..."
+            v-model="room"
           />
-          <input type="submit" class="fadeIn fourth" value="Log In" />
+          <input type="submit" class="fadeIn fourth" value="Create Room" />
         </form>
+      </div>
+    </div>
+    <div class="container">
+      <div class="card">
+        <div class="card-header ">
+          <h1 class="my-0 font-weight-normal">Rooms</h1>
+        </div>
+        <div class="card-body">
+          <div class="container">
+            <div class="row">
+              <!-- Room goes here -->
+              <RoomCard />
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import RoomCard from '../components/RoomCard'
 export default {
-  name: "Home",
-  components: {},
-  data() {
-    return {
-      username: ""
-    };
-  },
-  methods: {
-    login() {
-      if (this.username.length > 0) {
-        localStorage.setItem("username", this.username)
-        Toastify({
-          text: `welcome ${localStorage.username}`,
-          backgroundColor: "linear-gradient(to right, #DA22FF, #9733EE)",
-          className: "info"
-        }).showToast();
-
-        this.$router.push('/rooms')
-      } else {
-        Toastify({
-          text: "Input namanya dulu dong",
-          backgroundColor: "linear-gradient(to right, #DA22FF, #9733EE)",
-          className: "info"
-        }).showToast();
-      }
-    }
+  name: 'Rooms',
+  components: {
+    RoomCard
   }
-};
+}
 </script>
 
 <style scoped>
@@ -98,7 +80,7 @@ h2 {
   background: #fff;
   padding: 30px;
   width: 90%;
-  max-width: 450px;
+  max-width: 700px;
   position: relative;
   padding: 0px;
   -webkit-box-shadow: 0 30px 60px 0 rgba(0, 0, 0, 0.3);
@@ -128,9 +110,9 @@ h2.active {
 
 /* FORM TYPOGRAPHY*/
 
-input[type="button"],
-input[type="submit"],
-input[type="reset"] {
+input[type='button'],
+input[type='submit'],
+input[type='reset'] {
   background-color: #56baed;
   border: none;
   color: white;
@@ -152,15 +134,15 @@ input[type="reset"] {
   transition: all 0.3s ease-in-out;
 }
 
-input[type="button"]:hover,
-input[type="submit"]:hover,
-input[type="reset"]:hover {
+input[type='button']:hover,
+input[type='submit']:hover,
+input[type='reset']:hover {
   background-color: #39ace7;
 }
 
-input[type="button"]:active,
-input[type="submit"]:active,
-input[type="reset"]:active {
+input[type='button']:active,
+input[type='submit']:active,
+input[type='reset']:active {
   -moz-transform: scale(0.95);
   -webkit-transform: scale(0.95);
   -o-transform: scale(0.95);
@@ -168,7 +150,7 @@ input[type="reset"]:active {
   transform: scale(0.95);
 }
 
-input[type="text"] {
+input[type='text'] {
   background-color: #f6f6f6;
   border: none;
   color: #0d0d0d;
@@ -178,7 +160,7 @@ input[type="text"] {
   display: inline-block;
   font-size: 16px;
   margin: 5px;
-  width: 85%;
+  width: 70%;
   border: 2px solid #f6f6f6;
   -webkit-transition: all 0.5s ease-in-out;
   -moz-transition: all 0.5s ease-in-out;
@@ -189,12 +171,12 @@ input[type="text"] {
   border-radius: 5px 5px 5px 5px;
 }
 
-input[type="text"]:focus {
+input[type='text']:focus {
   background-color: #fff;
   border-bottom: 2px solid #5fbae9;
 }
 
-input[type="text"]:placeholder {
+input[type='text']:placeholder {
   color: #cccccc;
 }
 
@@ -309,7 +291,7 @@ input[type="text"]:placeholder {
   width: 0;
   height: 2px;
   background-color: #56baed;
-  content: "";
+  content: '';
   transition: width 0.2s;
 }
 
