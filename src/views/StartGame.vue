@@ -34,6 +34,9 @@ export default {
     return {
       playerCount: 0
     }
+  },
+  created () {
+    // socket.emit LANJUT SINIIIIIIIIIIIIIIIIIIIIII
   }
 }
 </script>

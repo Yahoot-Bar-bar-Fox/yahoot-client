@@ -3,7 +3,7 @@
     <div class="wrapper fadeInDown">
       <h1 class="my-3">Hello {{playerName}}</h1>
       <div id="formContent" class="mb-5">
-        <form>
+        <form @submit.prevent="addRoom">
           <input
             type="text"
             id="login"
@@ -18,15 +18,16 @@
     </div>
     <div class="container">
       <div class="card">
-        <div class="card-header ">
+        <div class="card-header">
           <h1 class="my-0 font-weight-normal">Rooms</h1>
         </div>
         <div class="card-body">
           <div class="container">
-            <div class="row">
+            <div class="row" style="display: flex; justify-content: space-around">
+
               <!-- Room goes here -->
-              <RoomCard />
-              
+              <RoomCard v-for="room in rooms" :key="room.id" :room="room" />
+
             </div>
           </div>
         </div>
@@ -36,40 +37,54 @@
 </template>
 
 <script>
-import RoomCard from '../components/RoomCard'
-import io from 'socket.io-client'
-const socket = io.connect('http://localhost:3000')
+import RoomCard from "../components/RoomCard";
+import io from "socket.io-client";
+const socket = io.connect("http://localhost:3000");
 
 export default {
-  name: 'Rooms',
-  data () {
+  name: "Rooms",
+  data() {
     return {
-      room: ''
-    }
+      room: "",
+    };
   },
   components: {
     RoomCard
   },
   methods: {
-    createRoom () {
-      socket.emit('createRoom', {
-        roomName: room,
-        username: localStorage.getItem('username')
-      })
+    addRoom() {
+      socket.emit("addRooms", {
+        roomName: this.room
+      });
+      this.room = ''
+    },
+    fetchRooms() {
+      socket.emit("fetchRooms");
     }
   },
   computed: {
-    rooms () {
-      return this.$store.state.rooms
+    rooms() {
+      return this.$store.state.rooms;
     },
-    playerName () {
-      return localStorage.username
+    playerName() {
+      return localStorage.username;
     }
   },
-  created () {
+  created() {
+    socket.on("roomCreated", room => {
+      console.log(room)
+      this.fetchRooms()
+    });
 
+    this.fetchRooms();
+
+    socket.on("showRooms", rooms => {
+      console.log(rooms, `iniiiiiii kumpulan rooomnyaaaaaaaaaahhhhh`);
+
+      this.$store.dispatch("showRooms", rooms);
+    });
   }
-}
+};
 </script>
 
 <style scoped>
@@ -138,9 +153,9 @@ h2.active {
 
 /* FORM TYPOGRAPHY*/
 
-input[type='button'],
-input[type='submit'],
-input[type='reset'] {
+input[type="button"],
+input[type="submit"],
+input[type="reset"] {
   background-color: #56baed;
   border: none;
   color: white;
@@ -162,15 +177,15 @@ input[type='reset'] {
   transition: all 0.3s ease-in-out;
 }
 
-input[type='button']:hover,
-input[type='submit']:hover,
-input[type='reset']:hover {
+input[type="button"]:hover,
+input[type="submit"]:hover,
+input[type="reset"]:hover {
   background-color: #39ace7;
 }
 
-input[type='button']:active,
-input[type='submit']:active,
-input[type='reset']:active {
+input[type="button"]:active,
+input[type="submit"]:active,
+input[type="reset"]:active {
   -moz-transform: scale(0.95);
   -webkit-transform: scale(0.95);
   -o-transform: scale(0.95);
@@ -178,7 +193,7 @@ input[type='reset']:active {
   transform: scale(0.95);
 }
 
-input[type='text'] {
+input[type="text"] {
   background-color: #f6f6f6;
   border: none;
   color: #0d0d0d;
@@ -199,12 +214,12 @@ input[type='text'] {
   border-radius: 5px 5px 5px 5px;
 }
 
-input[type='text']:focus {
+input[type="text"]:focus {
   background-color: #fff;
   border-bottom: 2px solid #5fbae9;
 }
 
-input[type='text']:placeholder {
+input[type="text"]:placeholder {
   color: #cccccc;
 }
 
@@ -319,7 +334,7 @@ input[type='text']:placeholder {
   width: 0;
   height: 2px;
   background-color: #56baed;
-  content: '';
+  content: "";
   transition: width 0.2s;
 }
 

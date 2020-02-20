@@ -1,11 +1,11 @@
 <template>
   <div class="col-auto mb-3">
-    <div class="card shadow-sm">
+    <div class="card shadow-sm" style="width: 18rem">
       <div class="card-header">
-        <h4 class="my-0 font-weight-normal">Room Name</h4>
+        <h4 class="my-0 font-weight-normal">{{room.name}}</h4>
       </div>
       <div class="card-body">
-        <p>Player Count : 1</p>
+        <p>Player Count : {{room.totalPlayer}}</p>
 
         <button
           @click="joinRoom"
@@ -22,6 +22,7 @@
 <script>
 export default {
   name: 'RoomCard',
+  props: ['room'],
   methods: {
     joinRoom: function() {
       this.$router.push('/start')
