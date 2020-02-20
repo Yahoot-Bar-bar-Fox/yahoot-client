@@ -1,13 +1,13 @@
 <template>
   <div class="home" style="margin-top: 80px">
     <div class="wrapper fadeInDown">
-      <h1>Hello Player1</h1>
-      <div id="formContent">
+      <h1 class="my-3">Hello {{playerName}}</h1>
+      <div id="formContent" class="mb-5">
         <form>
           <input
             type="text"
             id="login"
-            class="fadeIn second"
+            class="fadeIn second mt-4 mb-3"
             name="room"
             placeholder="Create room..."
             v-model="room"
@@ -26,6 +26,7 @@
             <div class="row">
               <!-- Room goes here -->
               <RoomCard />
+              
             </div>
           </div>
         </div>
@@ -60,6 +61,9 @@ export default {
   computed: {
     rooms () {
       return this.$store.state.rooms
+    },
+    playerName () {
+      return localStorage.username
     }
   },
   created () {
