@@ -33,7 +33,9 @@
 <script>
 export default {
   name: "Home",
-  components: {},
+  components: {
+    
+  },
   data() {
     return {
       username: ""
