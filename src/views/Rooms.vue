@@ -36,10 +36,34 @@
 
 <script>
 import RoomCard from '../components/RoomCard'
+import io from 'socket.io-client'
+const socket = io.connect('http://localhost:3000')
+
 export default {
   name: 'Rooms',
+  data () {
+    return {
+      room: ''
+    }
+  },
   components: {
     RoomCard
+  },
+  methods: {
+    createRoom () {
+      socket.emit('createRoom', {
+        roomName: room,
+        username: localStorage.getItem('username')
+      })
+    }
+  },
+  computed: {
+    rooms () {
+      return this.$store.state.rooms
+    }
+  },
+  created () {
+
   }
 }
 </script>
