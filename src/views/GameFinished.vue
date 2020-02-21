@@ -22,6 +22,11 @@ export default {
       playerName: null
     }
   },
+  computed: {
+    socket() {
+      return this.$store.state.socket
+    }
+  }
 }
 </script>
 
