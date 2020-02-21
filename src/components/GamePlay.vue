@@ -34,7 +34,7 @@
       </div>
     </div>
 
-    <GameFinished v-if="endGame" :points='points'/>
+    <GameFinished v-if="endGame" :points="points" />
   </div>
 </template>
 
@@ -68,8 +68,8 @@ export default {
   methods: {
     submitAnswer() {
       if (this.myAnswer == this.question[this.questionIndex].answer) {
-        this.questionIndex ++
-        if (this.questionIndex > this.question.length-1) {
+        this.questionIndex++
+        if (this.questionIndex > this.question.length - 1) {
           this.endGame = true
         }
         this.myAnswer = ''
@@ -77,7 +77,7 @@ export default {
       }
       else {
         console.log(`salah bodoh!`);
-        this.myAnswer = ''        
+        this.myAnswer = ''
       }
     }
   },
@@ -85,7 +85,7 @@ export default {
     socket() {
       return this.$store.state.socket;
     },
-    questionNow () {
+    questionNow() {
       return this.question[this.questionIndex].question
     }
   }
