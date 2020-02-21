@@ -34,6 +34,7 @@
       </div>
     </div>
 
+<<<<<<< HEAD
     <GameFinished v-if="endGame && !waitingOtherPlayer" :points="points" />
     <!--  -->
     <div id="waiting" style="display: flex; justify-content: space-around" v-if="waitingOtherPlayer">
@@ -49,6 +50,9 @@
         <h3 class="align-self-center">Please wait for other players....</h3>
       </div>
     </div>
+=======
+    <GameFinished v-if="endGame" :points="points" />
+>>>>>>> development
   </div>
 </template>
 
@@ -83,16 +87,23 @@ export default {
   methods: {
     submitAnswer() {
       if (this.myAnswer == this.question[this.questionIndex].answer) {
+<<<<<<< HEAD
         this.questionIndex++;
         if (this.questionIndex > this.question.length - 1) {
           this.endGame = true;
           this.waitingOtherPlayer = true
+=======
+        this.questionIndex++
+        if (this.questionIndex > this.question.length - 1) {
+          this.endGame = true
+>>>>>>> development
         }
         this.myAnswer = "";
         this.points += 10;
 
       } else {
         console.log(`salah bodoh!`);
+<<<<<<< HEAD
         this.myAnswer = "";
       }
 
@@ -100,6 +111,9 @@ export default {
         id: this.$route.params.id,
         username: localStorage.username,
         score: this.points
+=======
+        this.myAnswer = ''
+>>>>>>> development
       }
 
         this.socket.emit('highestScore', payload)
@@ -116,9 +130,13 @@ export default {
       return this.$store.state.socket;
     },
     questionNow() {
+<<<<<<< HEAD
       if (this.questionIndex <= this.question.length-1) {
         return this.question[this.questionIndex].question;
       }
+=======
+      return this.question[this.questionIndex].question
+>>>>>>> development
     }
   },
   created () {
