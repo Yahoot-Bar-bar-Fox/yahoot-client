@@ -20,8 +20,7 @@
 </template>
 
 <script>
-import io from "socket.io-client";
-const socket = io.connect("http://localhost:3000");
+// import io from '../socket/socketConnect'
 
 export default {
   name: 'RoomCard',
@@ -38,16 +37,21 @@ export default {
         username: localStorage.username
         }
 
-      socket.emit('joinRoom', payload)
+      this.socket.emit('joinRoom', payload)
 
       this.$router.push(`/${room}`)      
     }
   },
   created () {
-    socket.on ('someoneJoined', payload => {
+    this.socket.on ('someoneJoined', payload => {
       console.log(payload.username, ` telah bergabung`);      
       this.$store.dispatch('joinRoom', payload.room)
     })
+  },
+  computed: {
+    socket() {
+      return this.$store.state.socket
+    }
   }
 }
 </script>

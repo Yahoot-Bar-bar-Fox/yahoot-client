@@ -27,8 +27,7 @@
 
 <script>
 import Player from '../components/Player'
-import io from "socket.io-client";
-const socket = io.connect("http://localhost:3000");
+// import io from '../socket/socketConnect'
 
 export default {
   name: 'StartGame',
@@ -44,21 +43,24 @@ export default {
     playTheGame () {
       console.log(`playTheGame jalannnnnnnnnnnnnn`);
       
-      socket.emit('startGame', this.room)
+      this.socket.emit('startGame', this.room)
     }
   },
   created () {
-    socket.on ('someoneJoined', payload => {
-      console.log(payload, ` has joined to the room`);      
+    this.socket.on ('someoneJoined', payload => {
+      console.log(payload, `asd has joined to the room`);      
     })
 
-    socket.on('playing', payload => {
+    this.socket.on('playing', payload => {
       console.log(`jalan kok playing nyaaaaaaaaaaaaa`);
       
       this.$store.dispatch('isPLaying', payload)
     })
   },
   computed: {
+    socket() {
+      return this.$store.state.socket
+    },
     room () {
       return this.$store.state.room
     },

@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import io from 'socket.io-client'
-const socket = io.connect('http://localhost:3000')
+// const socket = io.connect('http://localhost:3000')
 
 Vue.use(Vuex)
 
@@ -9,7 +9,8 @@ export default new Vuex.Store({
   state: {
     rooms: [],
     room: {},
-    playingStatus: false
+    playingStatus: false,
+    socket: io.connect("http://localhost:3000")
   },
   mutations: {
     SET_ROOMS (state, payload) {
