@@ -2,11 +2,11 @@
   <div class="container" style="margin-top: 80px">
     <div class="card text-center">
       <div class="card-header ">
-        <h1 class="my-0 font-weight-normal">Username: {{playerName}}</h1>
+        <h3 class="my-0 font-weight-normal">The winner is.... {{theWinner.username}}</h3>
       </div>
       <div class="card-body">
         <div class="container">
-          <h1>your score: {{ points }}</h1>
+          <h1>score: {{ theWinner.score }}</h1>
         </div>
       </div>
     </div>
@@ -25,6 +25,9 @@ export default {
   computed: {
     socket() {
       return this.$store.state.socket
+    },
+    theWinner () {
+      return this.$store.state.highestScore
     }
   }
 }
