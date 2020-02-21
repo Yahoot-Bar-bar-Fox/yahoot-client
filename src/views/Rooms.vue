@@ -38,8 +38,7 @@
 
 <script>
 import RoomCard from "../components/RoomCard";
-import io from "socket.io-client";
-const socket = io.connect("http://localhost:3000");
+// import io from '../socket/socketConnect'
 
 export default {
   name: "Rooms",
@@ -53,16 +52,19 @@ export default {
   },
   methods: {
     addRoom() {
-      socket.emit("addRooms", {
+      this.socket.emit("addRooms", {
         roomName: this.room
       });
       this.room = ''
     },
     fetchRooms() {
-      socket.emit("fetchRooms");
+      this.socket.emit("fetchRooms");
     }
   },
   computed: {
+    socket(){
+      return this.$store.state.socket
+    },
     rooms() {
       return this.$store.state.rooms;
     },
@@ -71,19 +73,19 @@ export default {
     }
   },
   created() {
-    socket.on("roomCreated", room => {
+    this.socket.on("roomCreated", room => {
       console.log(room)
       this.fetchRooms()
     });
 
     this.fetchRooms();
 
-    socket.on("showRooms", rooms => {
+    this.socket.on("showRooms", rooms => {
 
       this.$store.dispatch("showRooms", rooms);
     });
 
-    socket.on ('someoneJoined', payload => {
+    this.socket.on ('someoneJoined', payload => {
       console.log(payload, ` has joined to the room`);      
     })
   }
