@@ -34,13 +34,31 @@
       </div>
     </div>
 
+<<<<<<< HEAD
+    <GameFinished v-if="endGame && !waitingOtherPlayer" :points="points" />
+    <!--  -->
+    <div id="waiting" style="display: flex; justify-content: space-around" v-if="waitingOtherPlayer">
+      <div class="row">
+        <img
+        class="align-self-end"
+          src="https://media.tenor.com/images/7d9cb36e95124fb829ff8f2450c3a567/tenor.gif"
+          alt
+          style="margin-left: auto; margin-right: auto"
+        />
+      </div>
+      <div class="row">
+        <h3 class="align-self-center">Please wait for other players....</h3>
+      </div>
+    </div>
+=======
     <GameFinished v-if="endGame" :points="points" />
+>>>>>>> development
   </div>
 </template>
 
 <script>
 // import io from '../socket/socketConnect'
-import GameFinished from '../components/GameFinished'
+import GameFinished from "../components/GameFinished";
 
 export default {
   name: "GamePlay",
@@ -49,10 +67,11 @@ export default {
   },
   data() {
     return {
+      waitingOtherPlayer: false,
       endGame: false,
       points: 0,
       questionIndex: 0,
-      myAnswer: '',
+      myAnswer: "",
       question: [
         {
           question: "bebek, bebek apa yang ga bisa jalan?",
@@ -68,17 +87,42 @@ export default {
   methods: {
     submitAnswer() {
       if (this.myAnswer == this.question[this.questionIndex].answer) {
+<<<<<<< HEAD
+        this.questionIndex++;
+        if (this.questionIndex > this.question.length - 1) {
+          this.endGame = true;
+          this.waitingOtherPlayer = true
+=======
         this.questionIndex++
         if (this.questionIndex > this.question.length - 1) {
           this.endGame = true
+>>>>>>> development
         }
-        this.myAnswer = ''
-        this.points += 10
-      }
-      else {
+        this.myAnswer = "";
+        this.points += 10;
+
+      } else {
         console.log(`salah bodoh!`);
-        this.myAnswer = ''
+<<<<<<< HEAD
+        this.myAnswer = "";
       }
+
+      let payload = {
+        id: this.$route.params.id,
+        username: localStorage.username,
+        score: this.points
+=======
+        this.myAnswer = ''
+>>>>>>> development
+      }
+
+        this.socket.emit('highestScore', payload)
+    },
+    setTimeout(time) {
+      setTimeout(() => { 
+        this.endGame = true
+        this.waitingOtherPlayer = false
+        }, time);
     }
   },
   computed: {
@@ -86,8 +130,23 @@ export default {
       return this.$store.state.socket;
     },
     questionNow() {
+<<<<<<< HEAD
+      if (this.questionIndex <= this.question.length-1) {
+        return this.question[this.questionIndex].question;
+      }
+=======
       return this.question[this.questionIndex].question
+>>>>>>> development
     }
+  },
+  created () {
+    this.setTimeout(20000)
+
+    this.socket.on('catchScore', payload => {
+      console.log(payload, `ini payload catch scoreeeeee`);
+      this.$store.dispatch('setHighestScore', payload)      
+    })
+  
   }
 };
 </script>

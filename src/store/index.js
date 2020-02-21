@@ -10,7 +10,11 @@ export default new Vuex.Store({
     rooms: [],
     room: {},
     playingStatus: false,
-    socket: io.connect("http://localhost:3000")
+    socket: io.connect("http://localhost:3000"),
+    highestScore: {
+      username: 'Bodoh semua ga ada yang bener',
+      score: 0
+    }
   },
   mutations: {
     SET_ROOMS (state, payload) {
@@ -21,6 +25,11 @@ export default new Vuex.Store({
     },
     SET_PLAYING_STATUS(state, payload) {
       state.playingStatus = payload
+    },
+    SET_HIGHEST_SCORE (state, payload) {
+      if (payload.score > state.highestScore.score) {
+        state.highestScore = payload
+      }
     }
   },
   actions: {
@@ -35,6 +44,9 @@ export default new Vuex.Store({
     },
     isPLaying(context, payload) {
       context.commit('SET_PLAYING_STATUS', payload)
+    },
+    setHighestScore (context, payload) {
+      context.commit('SET_HIGHEST_SCORE', payload)
     }
   },
   modules: {
