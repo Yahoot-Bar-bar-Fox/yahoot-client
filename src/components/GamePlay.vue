@@ -54,14 +54,29 @@ export default {
       questionIndex: 0,
       myAnswer: '',
       question: [
-        {
-          question: "bebek, bebek apa yang ga bisa jalan?",
-          answer: "bebek dikunci stang"
-        },
-        {
-          question: "makanan, makanan apa yang gede banget?",
-          answer: "candy borobudur"
-        }
+  {
+    "question": "Jika dibutuhkan waktu 10 menit untuk merebus 1 butir telur, berapa waktu yang diperlukan untuk merebus 10 butir telur?",
+    "answer": [
+      "10 menit",
+      "10",
+      "sepuluh menit",
+      "sepuluh"
+    ]
+  },
+  {
+    "question": "Bendera negara mana di Asia Tenggara yang jika dibalik akan menghasilkan pola atau bentuk yang sama ?",
+    "answer": [
+      "thailand"
+    ]
+  },
+  {
+    "question": "Berapa tahun masa jabatan Presiden dalam satu periode di New York ",
+    "answer": [
+      "4 tahun",
+      "4",
+      "empat tahun"
+    ]
+  },
       ]
     };
   },
