@@ -71,6 +71,13 @@ export default {
         this.questionIndex ++
         if (this.questionIndex > this.question.length-1) {
           this.endGame = true
+          let dataPlayer = {
+            username: localStorage.username,
+            score: 80
+          }
+          this.$store.dispatch('totalScore', dataPlayer )
+          console.log(dataPlayer)
+          console.log(this.$store.state.players)
         }
         this.myAnswer = ''
         this.points += 10
