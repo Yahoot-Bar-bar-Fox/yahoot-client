@@ -14,7 +14,7 @@
           </div>
 
           <br />
-          <form @submit.prevent="submitAnswer">
+          <form @submit.prevent="submitAnswer" class="mx-5">
             <div class="row">
               <div class="col-lg-11">
                 <input
@@ -34,7 +34,7 @@
       </div>
     </div>
 
-    <GameFinished v-if="endGame"/>
+    <GameFinished v-if="endGame" :points='points'/>
   </div>
 </template>
 

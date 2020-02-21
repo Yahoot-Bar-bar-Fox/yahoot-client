@@ -2,11 +2,11 @@
   <div class="container" style="margin-top: 80px">
     <div class="card text-center">
       <div class="card-header ">
-        <h1 class="my-0 font-weight-normal">Highest Score: {{ points }}</h1>
+        <h1 class="my-0 font-weight-normal">Username: {{playerName}}</h1>
       </div>
       <div class="card-body">
         <div class="container">
-          <h1>Player Name: {{ playerName }}</h1>
+          <h1>your score: {{ points }}</h1>
         </div>
       </div>
     </div>
@@ -16,10 +16,10 @@
 <script>
 export default {
   name: 'GameFinished',
+  props: ['points'],
   data: function() {
     return {
-      points: 0,
-      playerName: null
+      playerName: localStorage.username
     }
   },
   computed: {
