@@ -10,7 +10,12 @@
 
 <script>
 export default {
-  name: 'Player'
+  name: 'Player',
+  computed: {
+    socket() {
+      return this.$store.state.socket
+    }
+  }
 }
 </script>
 

@@ -56,6 +56,11 @@ export default {
     submitAnswer() {
       // call the socket io
     }
+  }, 
+  computed: {
+    socket() {
+      return this.$store.state.socket
+    }
   }
 }
 </script>
