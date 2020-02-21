@@ -8,7 +8,7 @@
         <p>Player Count : {{room.totalPlayer}}</p>
 
         <button
-          @click="joinRoom"
+          @click="joinRoom(room.id)"
           type="button"
           class="btn btn-lg btn-block btn-outline-primary"
         >
@@ -20,15 +20,36 @@
 </template>
 
 <script>
+import io from "socket.io-client";
+const socket = io.connect("http://localhost:3000");
+
 export default {
   name: 'RoomCard',
   props: ['room'],
-  methods: {
-    joinRoom: function() {
-      this.$router.push('/start')
+  data () {
+    return {
+
     }
+  },
+  methods: {
+    joinRoom (room) {
+      let payload = {
+        id: room,
+        username: localStorage.username
+        }
+
+      socket.emit('joinRoom', payload)
+
+      this.$router.push(`/${room}`)      
+    }
+  },
+  created () {
+    socket.on ('someoneJoined', payload => {
+      console.log(payload, ` telah bergabung`);      
+    })
   }
 }
 </script>
 
-<style></style>
+<style>
+</style>

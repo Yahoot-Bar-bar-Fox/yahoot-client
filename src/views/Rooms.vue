@@ -83,6 +83,10 @@ export default {
 
       this.$store.dispatch("showRooms", rooms);
     });
+
+    socket.on ('someoneJoined', payload => {
+      console.log(payload, ` has joined to the room`);      
+    })
   }
 };
 </script>
