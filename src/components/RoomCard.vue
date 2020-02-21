@@ -45,7 +45,8 @@ export default {
   },
   created () {
     socket.on ('someoneJoined', payload => {
-      console.log(payload, ` telah bergabung`);      
+      console.log(payload.username, ` telah bergabung`);      
+      this.$store.dispatch('joinRoom', payload.room)
     })
   }
 }

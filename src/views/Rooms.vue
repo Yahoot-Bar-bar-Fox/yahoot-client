@@ -79,7 +79,6 @@ export default {
     this.fetchRooms();
 
     socket.on("showRooms", rooms => {
-      console.log(rooms, `iniiiiiii kumpulan rooomnyaaaaaaaaaahhhhh`);
 
       this.$store.dispatch("showRooms", rooms);
     });

@@ -8,7 +8,8 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     rooms: [],
-    room: {}
+    room: {},
+    playingStatus: false
   },
   mutations: {
     SET_ROOMS (state, payload) {
@@ -16,6 +17,9 @@ export default new Vuex.Store({
     },
     JOIN_ROOM(state, payload) {
       state.room = payload
+    },
+    SET_PLAYING_STATUS(state, payload) {
+      state.playingStatus = payload
     }
   },
   actions: {
@@ -27,6 +31,9 @@ export default new Vuex.Store({
     },
     joinRoom (context, payload) {
       context.commit('JOIN_ROOM', payload)
+    },
+    isPLaying(context, payload) {
+      context.commit('SET_PLAYING_STATUS', payload)
     }
   },
   modules: {
