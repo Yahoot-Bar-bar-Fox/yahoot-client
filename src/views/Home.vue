@@ -1,5 +1,5 @@
 <template>
-  <div class="home" style="margin-top: 80px">
+  <div class="home blue" style="margin-top: 80px">
     <div class="wrapper fadeInDown">
       <div id="formContent">
         <!-- Tabs Titles -->

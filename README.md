@@ -1,25 +1,26 @@
-# yahoot-client
-this for yahoot client
+// players: [
+//   {
+//     name: '',
+//     score: ''
+//   },
+//   {
+//     name: '',
+//     score: ''
+//   }
+// ]
 
-## Project setup
-```
-npm install
-```
+// RoomPlayer
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+// class Games {
+//   constryctor() {
+//     rooms = [
+//       {
+//         name:'',
+//         plasyers: []
+//       }
+//     ]
 
-### Compiles and minifies for production
-```
-npm run build
-```
+//   }
+// }
 
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+// module.exports =new Games
