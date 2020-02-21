@@ -3,7 +3,6 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Rooms from '../views/Rooms.vue'
 import StartGame from '../views/StartGame.vue'
-import GamePlay from '../views/GamePlay'
 
 Vue.use(VueRouter)
 

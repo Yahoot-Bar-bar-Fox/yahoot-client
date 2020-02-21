@@ -1,6 +1,6 @@
 <template>
   <div class="container" style="margin-top: 80px">
-    <div class="card text-center">
+    <div class="card text-center" v-if="!isPlaying">
       <div class="card-header ">
         <h1 class="my-0 font-weight-normal">{{room.name}}</h1>
       </div>
@@ -22,17 +22,21 @@
         </div>
       </div>
     </div>
+
+    <GamePlay v-if="isPlaying"/>
   </div>
 </template>
 
 <script>
 import Player from '../components/Player'
 // import io from '../socket/socketConnect'
+import GamePlay from '../components/GamePlay'
 
 export default {
   name: 'StartGame',
   components: {
-    Player
+    Player,
+    GamePlay
   },
   data: function() {
     return {
