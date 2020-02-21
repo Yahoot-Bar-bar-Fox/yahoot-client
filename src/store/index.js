@@ -7,11 +7,15 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    rooms: []
+    rooms: [],
+    room: {}
   },
   mutations: {
     SET_ROOMS (state, payload) {
       state.rooms = payload
+    },
+    JOIN_ROOM(state, payload) {
+      state.room = payload
     }
   },
   actions: {
@@ -20,6 +24,9 @@ export default new Vuex.Store({
     },
     showRooms (context, payload) {
       context.commit('SET_ROOMS', payload)
+    },
+    joinRoom (context, payload) {
+      context.commit('JOIN_ROOM', payload)
     }
   },
   modules: {

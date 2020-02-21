@@ -1,14 +1,14 @@
 <template>
   <div class="col-auto mb-3">
-    <div class="card shadow-sm">
+    <div class="card shadow-sm" style="width: 18rem">
       <div class="card-header">
-        <h4 class="my-0 font-weight-normal">Room Name</h4>
+        <h4 class="my-0 font-weight-normal">{{room.name}}</h4>
       </div>
       <div class="card-body">
-        <p>Player Count : 1</p>
+        <p>Player Count : {{room.totalPlayer}}</p>
 
         <button
-          @click="joinRoom"
+          @click="joinRoom(room.id)"
           type="button"
           class="btn btn-lg btn-block btn-outline-primary"
         >
@@ -20,14 +20,36 @@
 </template>
 
 <script>
+import io from "socket.io-client";
+const socket = io.connect("http://localhost:3000");
+
 export default {
   name: 'RoomCard',
-  methods: {
-    joinRoom: function() {
-      this.$router.push('/start')
+  props: ['room'],
+  data () {
+    return {
+
     }
+  },
+  methods: {
+    joinRoom (room) {
+      let payload = {
+        id: room,
+        username: localStorage.username
+        }
+
+      socket.emit('joinRoom', payload)
+
+      this.$router.push(`/${room}`)      
+    }
+  },
+  created () {
+    socket.on ('someoneJoined', payload => {
+      console.log(payload, ` telah bergabung`);      
+    })
   }
 }
 </script>
 
-<style></style>
+<style>
+</style>

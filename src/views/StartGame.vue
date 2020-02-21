@@ -25,6 +25,9 @@
 
 <script>
 import Player from '../components/Player'
+import io from "socket.io-client";
+const socket = io.connect("http://localhost:3000");
+
 export default {
   name: 'StartGame',
   components: {
@@ -34,8 +37,14 @@ export default {
     return {
       playerCount: 0
     }
+  },
+  created () {
+    socket.on ('someoneJoined', payload => {
+      console.log(payload, ` has joined to the room`);      
+    })
   }
 }
 </script>
 
-<style></style>
+<style>
+</style>
